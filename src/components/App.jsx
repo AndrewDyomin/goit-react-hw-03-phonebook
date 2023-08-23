@@ -26,7 +26,7 @@ createContact = async (values) => {
       alert(`${values.name} is already in contacts`);
     } else {
       values.id = nanoid();
-      const savedContacts = await this.setState(prevState => {
+      await this.setState(prevState => {
         return {
           contacts: [...prevState.contacts, values],
         };
@@ -40,7 +40,7 @@ changeFilter = searchValue => {
 }
 
 handleDelete = async (contactId) => {
-  const savedContacts = await this.setState(prevState => {
+  await this.setState(prevState => {
     return {
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     };
