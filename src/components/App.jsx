@@ -9,15 +9,15 @@ export class App extends Component {
   state = {
     contacts: [],
     filter: '',
-  }
+  };
 
   async componentDidMount() { 
   const savedContacts = await localStorage.getItem("contacts");
   const parsedContacts = JSON.parse(savedContacts);
   if (this.state.contacts !== parsedContacts) {
     this.setState({ contacts: parsedContacts });
-  }
-}
+  };
+};
 
 createContact = async (values) => {
   const targetContact = this.state.contacts
