@@ -14,7 +14,9 @@ export class App extends Component {
   async componentDidMount() { 
   const savedContacts = await localStorage.getItem("contacts");
   const parsedContacts = JSON.parse(savedContacts);
-  this.setState({ contacts: parsedContacts });
+  if (this.state.contacts !== parsedContacts) {
+    this.setState({ contacts: parsedContacts });
+  }
 }
 
 createContact = async (values) => {
