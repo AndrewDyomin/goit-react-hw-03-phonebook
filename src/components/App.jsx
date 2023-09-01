@@ -20,7 +20,13 @@ export class App extends Component {
   };
 };
 
-createContact = async (values) => {
+componentDidUpdate(prevState) {
+  if (prevState.contacts !== this.state.contacts) {
+    localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+  };
+};
+
+createContact = (values) => {
   const targetContact = this.state.contacts
     .map((cont) => cont.name.toLowerCase())
     .includes(values.name.toLowerCase());
@@ -29,13 +35,13 @@ createContact = async (values) => {
       alert(`${values.name} is already in contacts`);
     } else {
       values.id = nanoid();
-      await this.setState(prevState => {
+      this.setState(prevState => {
         return {
           contacts: [...prevState.contacts, values],
         };
       });
   };
-  localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+  
 };
 
 changeFilter = searchValue => {
