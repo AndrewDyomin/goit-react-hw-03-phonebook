@@ -20,7 +20,7 @@ export class App extends Component {
   };
 };
 
-componentDidUpdate(prevState) {
+componentDidUpdate(prevProps, prevState) {
   if (prevState.contacts !== this.state.contacts) {
     localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
   };
@@ -48,13 +48,12 @@ changeFilter = searchValue => {
   this.setState({filter: `${searchValue.target.value}`});
 }
 
-handleDelete = async (contactId) => {
-  await this.setState(prevState => {
+handleDelete = (contactId) => {
+  this.setState(prevState => {
     return {
       contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     };
   });
-  localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
 };
 
   render() {
